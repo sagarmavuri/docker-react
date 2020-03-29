@@ -1,0 +1,7 @@
+sudo: required
+services:
+    - docker
+before_install:
+    - docker build -f Dockerfile.dev -t mav1812/docker-react .
+script:
+    - docker run mav1812/docker-react npm test -- --coverage
