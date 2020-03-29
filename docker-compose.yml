@@ -1,0 +1,21 @@
+version: '3'
+services: 
+    react-app:
+        build:
+            context: .
+            dockerfile: Dockerfile.dev
+        stdin_open: true # this is required for an unkonwn bug. 
+        ports: 
+            - "3000:3000"
+        volumes: # references the FS snapshot instead of copying, hot loading
+            - /usr/app/node_modules # do not map this folder, since owd has no node_modules so null reference would occur otherwise
+            - .:/usr/app # map all
+    react-app-test:
+        build:
+            context: .
+            dockerfile: Dockerfile.dev
+        stdin_open: true
+        command: ["npm", "test"]
+        volumes: 
+            - /usr/app/node_modules
+            - .:/usr/app
