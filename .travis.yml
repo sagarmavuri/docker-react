@@ -4,4 +4,4 @@ services:
 before_install:
     - docker build -f Dockerfile.dev -t mav1812/docker-react .
 script:
-    - docker run mav1812/docker-react npm test -- --coverage
+    - docker run -e CI=true mav1812/docker-react npm test
